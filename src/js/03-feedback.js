@@ -13,20 +13,30 @@ const refs = {
 refs.form.addEventListener('submit', onFormSubmit);
 refs.form.addEventListener('input', throttle(onFormInput, 500));
 
+
 formInfo();
 
 
 function onFormSubmit(event) {
-    console.log({email: refs.email.value, message: refs.message.value});
     event.preventDefault();
+
+    if (event.target.email.value === '' || event.target.message.value === '') {
+        alert('Please fill all fields');
+        return;
+    }
+
+    console.log({email: refs.email.value, message: refs.message.value});
+    
     event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
 }
+
 
 function onFormInput() {
     const formData = JSON.stringify({email: refs.email.value, message: refs.message.value})
     localStorage.setItem(STORAGE_KEY, formData);
 }
+
 
 function formInfo() {
     const saveInfo = JSON.parse(localStorage.getItem(STORAGE_KEY));
