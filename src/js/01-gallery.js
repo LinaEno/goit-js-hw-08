@@ -4,10 +4,10 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 // Change code below this line
 
-console.log(galleryItems);
 
-const makeGalleryItems = items => {
-  const { preview, original, description } = items;
+
+const makeGalleryItem = item => {
+  const { preview, original, description } = item;
   return `
   <a class="gallery__item" href="${original}">
   <img class="gallery__image" src="${preview}" alt="${description}" />
@@ -17,7 +17,7 @@ const makeGalleryItems = items => {
 
 const galleryContainer = document.querySelector('.gallery');
 
-const galleryImages = galleryItems.map(makeGalleryItems).join('');
+const galleryImages = galleryItems.map(makeGalleryItem).join('');
 
 galleryContainer.insertAdjacentHTML('afterbegin', galleryImages);
 
